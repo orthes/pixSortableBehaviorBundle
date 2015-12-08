@@ -13,6 +13,7 @@ namespace Pix\SortableBehaviorBundle\Services;
 abstract class PositionHandler
 {
     protected $positionField;
+    protected $groupField;
 
     abstract public function getLastPosition($entity);
 
@@ -22,6 +23,14 @@ abstract class PositionHandler
     public function setPositionField($positionField)
     {
         $this->positionField = $positionField;
+    }
+
+    /**
+     * @param mixed $groupField
+     */
+    public function setGroupField($groupField)
+    {
+        $this->groupField = $groupField;
     }
 
     /**
@@ -38,6 +47,22 @@ abstract class PositionHandler
             return $this->positionField['entities'][$entity];
         } else {
             return $this->positionField['default'];
+        }
+    }
+
+    /**
+     * @param $entity
+     *
+     * @return string
+     */
+    public function getGroupFieldByEntity($entity) {
+        if(is_object($entity)) {
+            $entity = \Doctrine\Common\Util\ClassUtils::getClass($entity);
+        }
+        if(isset($this->groupField['entities'][$entity])) {
+            return $this->groupField['entities'][$entity];
+        } else {
+            return $this->groupField['default'];
         }
     }
 

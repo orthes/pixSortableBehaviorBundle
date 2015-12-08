@@ -11,7 +11,7 @@ https://github.com/sonata-project/SonataAdminBundle/blob/master/Resources/doc/co
 
 ### Configuration
 
-By default, this extension works with Doctrine ORM, but you can choose to use Doctrine MongoDB by defining the driver configuration : 
+By default, this extension works with Doctrine ORM, but you can choose to use Doctrine MongoDB by defining the driver configuration :
 
 ``` yaml
 # app/config/config.yml
@@ -22,4 +22,7 @@ pix_sortable_behavior:
         entities:
             AppBundle/Entity/Foobar: order
             AppBundle/Entity/Baz: rang
+    group_field:
+        entities:
+            AppBundle/Entity/Foobar: category
 ```

@@ -56,6 +56,15 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
+            ->arrayNode('group_field')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('default')->defaultValue(null)->end()
+                    ->arrayNode('entities')
+                        ->prototype('scalar')->end()
+                    ->end()
+                ->end()
+            ->end()
         ;
 
         return $treeBuilder;

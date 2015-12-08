@@ -41,7 +41,7 @@ class SortableAdminController extends CRUDController
 
         $entity = \Doctrine\Common\Util\ClassUtils::getClass($object);
 
-        $lastPosition = $positionService->getLastPosition($entity);
+        $lastPosition = $positionService->getLastPosition($object);
 
         $position = $positionService->getPosition($object, $position, $lastPosition);
 
