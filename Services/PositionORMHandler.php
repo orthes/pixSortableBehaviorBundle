@@ -28,16 +28,17 @@ class PositionORMHandler extends PositionHandler
 
     public function getLastPosition($entity)
     {
-        if ($group = $this->getGroupFieldByEntity($entity)) {
+        if ($groupName = $this->getGroupFieldByEntity($entity)) {
             $className = get_class($entity);
             $getter = sprintf('get%s', ucfirst($this->getGroupFieldByEntity($entity)));
+            $group = $entity->{$getter}();
 
             $query = $this->em->createQuery(sprintf(
-                'SELECT MAX(m.%s) FROM %s m WHERE m.%s = %s',
+                'SELECT MAX(m.%s) FROM %s m WHERE m.%s %s',
                 $positionFiles = $this->getPositionFieldByEntity($className),
                 $className,
-                $group,
-                $entity->{$getter}()->getId()
+                $groupName,
+                $group ? '= '. $group->getId() : 'IS NULL'
             ));
         } else {
             $className = is_object($entity) ? get_class($entity) : $entity;
